@@ -31,13 +31,35 @@
         .image-row img {
             height: 100px;
             width: auto;
-            transition: transform 0.3s ease;
+            transition: transform 1s ease;
         }
         .image-row img:hover {
-            transform: translateY(-10px) translateZ(100px);
-            -webkit-filter: drop-shadow(5px 5px 5px #666666);
-            filter: drop-shadow(5px 5px 5px #666666);
+            transform: translateY(-10px) rotateZ(-10deg);
+            /*-webkit-filter: drop-shadow(5px 5px 5px #666666);*/
+            /*filter: drop-shadow(5px 5px 5px #666666);*/
         }
+
+        a.fancy-link {
+            display: inline-block;
+            font-size: 24px;
+            text-decoration: none; /* Remove underline */
+            color: #000000; /* Base link color */
+            background-color: #ffffff;
+            padding: 10px 20px; /* Spacing around text */
+            border: 2px solid #c4c4c4; /* Border to match text color */
+            border-radius: 5px; /* Rounded corners */
+            transition: all 0.3s ease; /* Smooth transition for effects */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        /* Hover Effect */
+        a.fancy-link:hover {
+            background-color: #26a707; /* Background color on hover */
+            color: #ffffff; /* Text color on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+            transform: scale(1.05); /* Slightly scale up link */
+        }
+
     </style>
 </head>
 <body>
@@ -53,7 +75,7 @@
             <img src="logo/D.png" alt="S" class="logo"/>
         </div>
 
-        <h1>Welcome to irusland</h1>
+        <h1>Welcome to <a href="https://github.com/irusland" class="fancy-link">irusland</a> (•ᴥ• )́`́'́`́'́⻍</h1>
         <p>This is the personal webpage of irusland.</p>
     </div>
 </body>
