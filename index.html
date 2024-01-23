@@ -22,18 +22,37 @@
             width: 150px;
             margin-bottom: 20px;
         }
+        .image-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .image-row img {
+            height: 100px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        .image-row img:hover {
+            transform: translateY(-10px) translateZ(100px);
+            -webkit-filter: drop-shadow(5px 5px 5px #666666);
+            filter: drop-shadow(5px 5px 5px #666666);
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="logo/I.png" alt="I" class="logo"/>
-        <img src="logo/R.png" alt="R" class="logo"/>
-        <img src="logo/U.png" alt="U" class="logo"/>
-        <img src="logo/S.png" alt="S" class="logo"/>
-        <img src="logo/L.png" alt="L" class="logo"/>
-        <img src="logo/A.png" alt="A" class="logo"/>
-        <img src="logo/N.png" alt="N" class="logo"/>
-        <img src="logo/D.png" alt="S" class="logo"/>
+        <div class="image-row">
+            <img src="logo/I.png" alt="I" class="logo"/>
+            <img src="logo/R.png" alt="R" class="logo"/>
+            <img src="logo/U.png" alt="U" class="logo"/>
+            <img src="logo/S.png" alt="S" class="logo"/>
+            <img src="logo/L.png" alt="L" class="logo"/>
+            <img src="logo/A.png" alt="A" class="logo"/>
+            <img src="logo/N.png" alt="N" class="logo"/>
+            <img src="logo/D.png" alt="S" class="logo"/>
+        </div>
+
         <h1>Welcome to irusland</h1>
         <p>This is the personal webpage of irusland.</p>
     </div>
