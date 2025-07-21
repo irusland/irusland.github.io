@@ -3,80 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Irusland - Personal Page</title>
+    <title>Ruslan Sirazhetdinov - AI Developer & World Champion</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Section */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        .hero-name {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #f7f7f7;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
-        .container {
+
+        .letter-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .letter-logo:hover {
+            transform: translateY(-10px) rotateZ(-10deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 40px 0;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Sections */
+        .content {
+            background: white;
+            margin: 0;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: block;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Bio Section */
+        .bio-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .bio-image {
             text-align: center;
         }
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        .image-row {
+
+        .profile-placeholder {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto;
+            color: white;
+            font-size: 4em;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .bio-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+
+        .bio-text p {
+            margin-bottom: 15px;
+        }
+
+        /* YouTube Section */
+        .youtube-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .youtube-embed {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .youtube-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Resume Section */
+        .resume-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .resume-preview {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .resume-icon {
+            font-size: 4em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .resume-link {
+            display: inline-flex;
+            align-items: center;
             gap: 10px;
-        }
-        .image-row img {
-            height: 100px;
-            width: auto;
-            transition: transform 1s ease;
-        }
-        .image-row img:hover {
-            transform: translateY(-10px) rotateZ(-10deg);
-            /*-webkit-filter: drop-shadow(5px 5px 5px #666666);*/
-            /*filter: drop-shadow(5px 5px 5px #666666);*/
-        }
-
-        a.fancy-link {
-            display: inline-block;
-            font-size: 24px;
-            text-decoration: none; /* Remove underline */
-            color: #000000; /* Base link color */
-            background-color: #ffffff;
-            padding: 10px 20px; /* Spacing around text */
-            border: 2px solid #c4c4c4; /* Border to match text color */
-            border-radius: 5px; /* Rounded corners */
-            transition: all 0.3s ease; /* Smooth transition for effects */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 20px;
         }
 
-        /* Hover Effect */
-        a.fancy-link:hover {
-            background-color: #26a707; /* Background color on hover */
-            color: #ffffff; /* Text color on hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
-            transform: scale(1.05); /* Slightly scale up link */
+        .resume-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero-name {
+                gap: 8px;
+            }
+
+            .letter-logo {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .bio-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 20px;
+            }
+
+            .profile-placeholder {
+                width: 180px;
+                height: 180px;
+                font-size: 3em;
+            }
+
+            .social-links {
+                gap: 10px;
+            }
+
+            .social-link {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name {
+                gap: 5px;
+            }
+
+            .letter-logo {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="image-row">
-            <img src="logo/I.png" alt="I" class="logo"/>
-            <img src="logo/R.png" alt="R" class="logo"/>
-            <img src="logo/U.png" alt="U" class="logo"/>
-            <img src="logo/S.png" alt="S" class="logo"/>
-            <img src="logo/L.png" alt="L" class="logo"/>
-            <img src="logo/A.png" alt="A" class="logo"/>
-            <img src="logo/N.png" alt="N" class="logo"/>
-            <img src="logo/D.png" alt="S" class="logo"/>
+    <!-- Header with Contact Info -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <strong>Ruslan Sirazhetdinov</strong>
+                </div>
+                <div class="contact-info">
+                    <a href="http://t.me/irusland" class="contact-link" target="_blank">
+                        📱 Telegram
+                    </a>
+                    <a href="mailto:ruslan@sirazhetdinov.com" class="contact-link">
+                        ✉️ Email
+                    </a>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <h1>Welcome to <a href="https://github.com/irusland" class="fancy-link">irusland</a> (•ᴥ• )́`́'́`́'́⻍</h1>
-        <p>This is the personal webpage of irusland.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-name">
+                <div class="letter-logo">I</div>
+                <div class="letter-logo">R</div>
+                <div class="letter-logo">U</div>
+                <div class="letter-logo">S</div>
+                <div class="letter-logo">L</div>
+                <div class="letter-logo">A</div>
+                <div class="letter-logo">N</div>
+                <div class="letter-logo">D</div>
+            </div>
+
+            <h1>AI Developer & World Champion</h1>
+            <p>Combining cutting-edge AI technology with world-class athletic achievement</p>
+
+            <div class="social-links">
+                <a href="http://t.me/irusland" class="social-link" target="_blank">
+                    📱 Telegram
+                </a>
+                <a href="https://youtube.com/@irusland" class="social-link" target="_blank">
+                    📺 YouTube
+                </a>
+                <a href="https://linkedin.com/in/irusland" class="social-link" target="_blank">
+                    📋 LinkedIn
+                </a>
+                <a href="https://github.com/irusland" class="social-link" target="_blank">
+                    💻 GitHub
+                </a>
+                <a href="https://instagram.com/irusland" class="social-link" target="_blank">
+                    📷 Instagram
+                </a>
+                <a href="https://folio.procreate.com/irusland" class="social-link" target="_blank">
+                    🎨 Procreate
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- About Me Section -->
+        <section class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="bio-content">
+                    <div class="bio-image">
+                        <div class="profile-placeholder">RS</div>
+                    </div>
+                    <div class="bio-text">
+                        <p><strong>Я Руслан @irusland,</strong></p>
+                        <p>🤖 <strong>Разработчик сервисов искусственного интеллекта</strong> - создаю инновационные AI-решения для реального мира</p>
+                        <p>🏃‍♂️ <strong>Профессиональный спортсмен</strong> - достигаю высших результатов в спорте</p>
+                        <p>🎓 <strong>Магистр компьютерных наук с красным дипломом МФТИ</strong> - фундаментальное образование в области технологий</p>
+                        <p>🏆 <strong>Чемпион мира по сноукайт фристайлу</strong> - покоритель воздушных стихий</p>
+                        <p>⛵ <strong>Мастер спорта России по парусному спорту</strong> - мастер водной стихии</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- YouTube Section -->
+        <section class="section">
+            <div class="container">
+                <h2>My YouTube Channel</h2>
+                <div class="youtube-container">
+                    <p>Follow my journey in AI development and extreme sports</p>
+                    <div class="youtube-embed">
+                        <iframe
+                            src="https://www.youtube.com/embed?listType=playlist&list=UU_irusland"
+                            title="Irusland YouTube Channel"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <a href="https://youtube.com/@irusland" class="resume-link" target="_blank">
+                        📺 Visit My Channel
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section class="section">
+            <div class="container">
+                <h2>Resume</h2>
+                <div class="resume-container">
+                    <div class="resume-preview">
+                        <div class="resume-icon">📋</div>
+                        <h3>Professional CV</h3>
+                        <p>Download my complete resume to learn more about my professional experience, technical skills, and achievements in AI development and competitive sports.</p>
+                        <a href="https://github.com/irusland/irusland/blob/main/ruslan-sirazhetdinov-cv-en.pdf" class="resume-link" target="_blank">
+                            📄 Download CV (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Ruslan Sirazhetdinov (@irusland)</p>
+            <p>AI Developer • World Champion • Innovation Enthusiast</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scroll behavior for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add hover effects to letter logos
+        document.querySelectorAll('.letter-logo').forEach(letter => {
+            letter.addEventListener('mouseenter', function() {
+                this.style.background = `linear-gradient(45deg, hsl(${Math.random() * 360}, 70%, 60%), hsl(${Math.random() * 360}, 70%, 60%))`;
+            });
+        });
+    </script>
 </body>
 </html>
