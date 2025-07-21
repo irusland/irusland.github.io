@@ -11,13 +11,58 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-accent: #f8f9fa;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent-color: #2c3e50;
+            --accent-hover: #34495e;
+            --border-color: #e9ecef;
+            --border-light: #dee2e6;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-accent: #333333;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-color: #ffffff;
+            --accent-hover: #f0f0f0;
+            --border-color: #404040;
+            --border-light: #505050;
+            --shadow-light: rgba(0, 0, 0, 0.3);
+            --shadow-medium: rgba(0, 0, 0, 0.4);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1a1a1a;
+                --bg-secondary: #2d2d2d;
+                --bg-accent: #333333;
+                --text-primary: #ffffff;
+                --text-secondary: #b0b0b0;
+                --accent-color: #ffffff;
+                --accent-hover: #f0f0f0;
+                --border-color: #404040;
+                --border-light: #505050;
+                --shadow-light: rgba(0, 0, 0, 0.3);
+                --shadow-medium: rgba(0, 0, 0, 0.4);
+            }
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
             line-height: 1.8;
-            color: #2c3e50;
-            background: #f8f9fa;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             min-height: 100vh;
             letter-spacing: 0.3px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -26,15 +71,73 @@
             padding: 0 20px;
         }
 
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--accent-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .theme-label {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
         /* Header Section */
         .header {
-            background: #ffffff;
+            background: var(--bg-secondary);
             padding: 20px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid #e9ecef;
+            box-shadow: 0 2px 8px var(--shadow-light);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease;
         }
 
         .header-content {
@@ -57,8 +160,8 @@
             align-items: center;
             gap: 8px;
             padding: 10px 20px;
-            background: #2c3e50;
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-secondary);
             text-decoration: none;
             border-radius: 4px;
             transition: all 0.2s ease;
@@ -67,23 +170,23 @@
         }
 
         .contact-link:hover {
-            background: #34495e;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            background: var(--accent-hover);
+            box-shadow: 0 3px 8px var(--shadow-medium);
         }
 
         /* CV Preview Section */
         .cv-preview {
             padding: 40px 0;
-            background: #ffffff;
-            border-bottom: 1px solid #e9ecef;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .cv-embed {
             max-width: 1000px;
             margin: 0 auto;
-            background: white;
+            background: var(--bg-secondary);
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px var(--shadow-light);
             overflow: hidden;
         }
 
@@ -96,8 +199,8 @@
         .cv-actions {
             padding: 20px;
             text-align: center;
-            background: #f8f9fa;
-            border-top: 1px solid #e9ecef;
+            background: var(--bg-accent);
+            border-top: 1px solid var(--border-color);
         }
 
         .cv-download-btn {
@@ -105,8 +208,8 @@
             align-items: center;
             gap: 8px;
             padding: 12px 24px;
-            background: #2c3e50;
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-secondary);
             text-decoration: none;
             border-radius: 4px;
             font-weight: 500;
@@ -115,13 +218,13 @@
         }
 
         .cv-download-btn:hover {
-            background: #34495e;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            background: var(--accent-hover);
+            box-shadow: 0 3px 8px var(--shadow-medium);
         }
 
         /* Content Sections */
         .content {
-            background: white;
+            background: var(--bg-secondary);
             margin: 0;
         }
 
@@ -130,14 +233,14 @@
         }
 
         .section:nth-child(even) {
-            background: #f8f9fa;
+            background: var(--bg-accent);
         }
 
         .section h2 {
             font-size: 2.2em;
             margin-bottom: 40px;
             text-align: center;
-            color: #2c3e50;
+            color: var(--text-primary);
             font-weight: 400;
             letter-spacing: 0.5px;
         }
@@ -146,7 +249,7 @@
             content: '';
             width: 60px;
             height: 1px;
-            background: #2c3e50;
+            background: var(--accent-color);
             display: block;
             margin: 20px auto;
         }
@@ -167,15 +270,15 @@
         .profile-placeholder {
             width: 200px;
             height: 200px;
-            background: #2c3e50;
+            background: var(--accent-color);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto;
-            color: white;
+            color: var(--bg-secondary);
             font-size: 3em;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px var(--shadow-light);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
         }
 
@@ -204,7 +307,7 @@
             margin: 30px 0;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px var(--shadow-light);
         }
 
         .youtube-embed iframe {
@@ -224,16 +327,16 @@
         }
 
         .resume-preview {
-            background: #f8f9fa;
+            background: var(--bg-accent);
             border-radius: 15px;
             padding: 40px;
             margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px var(--shadow-light);
         }
 
         .resume-icon {
             font-size: 3em;
-            color: #2c3e50;
+            color: var(--text-primary);
             margin-bottom: 20px;
         }
 
@@ -242,8 +345,8 @@
             align-items: center;
             gap: 8px;
             padding: 12px 24px;
-            background: #2c3e50;
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-secondary);
             text-decoration: none;
             border-radius: 4px;
             font-size: 1em;
@@ -253,17 +356,17 @@
         }
 
         .resume-link:hover {
-            background: #34495e;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            background: var(--accent-hover);
+            box-shadow: 0 3px 8px var(--shadow-medium);
         }
 
         /* Footer */
         .footer {
-            background: #2c3e50;
-            color: white;
+            background: var(--accent-color);
+            color: var(--bg-secondary);
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid #34495e;
+            border-top: 1px solid var(--border-color);
         }
 
         .footer p {
@@ -321,6 +424,14 @@
                     <strong>Ruslan Sirazhetdinov</strong>
                 </div>
                 <div class="contact-info">
+                    <div class="theme-toggle">
+                        <span class="theme-label">🌙</span>
+                        <label class="theme-switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="theme-label">☀️</span>
+                    </div>
                     <a href="http://t.me/irusland" class="contact-link" target="_blank">
                         📱 Telegram
                     </a>
@@ -407,6 +518,47 @@
     </footer>
 
     <script>
+        // Theme switching functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        // Set initial theme
+        if (currentTheme) {
+            body.setAttribute('data-theme', currentTheme);
+            themeToggle.checked = currentTheme === 'light';
+        } else if (prefersDark) {
+            body.setAttribute('data-theme', 'dark');
+            themeToggle.checked = false;
+        }
+        
+        // Theme toggle event listener
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    body.setAttribute('data-theme', 'dark');
+                    themeToggle.checked = false;
+                } else {
+                    body.setAttribute('data-theme', 'light');
+                    themeToggle.checked = true;
+                }
+            }
+        });
+
         // Add smooth scroll behavior for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
