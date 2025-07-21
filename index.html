@@ -25,7 +25,7 @@
             --shadow-medium: rgba(0, 0, 0, 0.15);
         }
 
-        [data-theme="dark"] {
+        body[data-theme="dark"] {
             --bg-primary: #1a1a1a;
             --bg-secondary: #2d2d2d;
             --bg-accent: #333333;
@@ -37,6 +37,20 @@
             --border-light: #505050;
             --shadow-light: rgba(0, 0, 0, 0.3);
             --shadow-medium: rgba(0, 0, 0, 0.4);
+        }
+
+        body[data-theme="light"] {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-accent: #f8f9fa;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent-color: #2c3e50;
+            --accent-hover: #34495e;
+            --border-color: #e9ecef;
+            --border-light: #dee2e6;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
         }
 
         @media (prefers-color-scheme: dark) {
@@ -500,9 +514,8 @@
     </footer>
 
     <script>
-        // Theme switching functionality
+        // Theme switching functionality - run immediately
         const body = document.body;
-        const themeOptions = document.querySelectorAll('.theme-option');
         
         // Get system preference
         const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -510,7 +523,8 @@
         // Apply theme to body
         const applyTheme = (theme) => {
             if (theme === 'auto') {
-                body.setAttribute('data-theme', getSystemTheme());
+                const systemTheme = getSystemTheme();
+                body.setAttribute('data-theme', systemTheme);
             } else {
                 body.setAttribute('data-theme', theme);
             }
@@ -518,6 +532,7 @@
         
         // Update active theme option
         const updateActiveOption = (selectedTheme) => {
+            const themeOptions = document.querySelectorAll('.theme-option');
             themeOptions.forEach(option => {
                 option.classList.remove('active');
                 if (option.dataset.theme === selectedTheme) {
@@ -529,34 +544,41 @@
         // Get saved theme preference or default to 'auto'
         const currentTheme = localStorage.getItem('theme') || 'auto';
         
-        // Set initial theme
+        // Set initial theme immediately
         applyTheme(currentTheme);
-        updateActiveOption(currentTheme);
         
-        // Theme option click handlers
-        themeOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                const selectedTheme = this.dataset.theme;
-                localStorage.setItem('theme', selectedTheme);
-                applyTheme(selectedTheme);
-                updateActiveOption(selectedTheme);
+        // Wait for DOM to load for click handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeOptions = document.querySelectorAll('.theme-option');
+            
+            // Update active option after DOM loads
+            updateActiveOption(currentTheme);
+            
+            // Theme option click handlers
+            themeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedTheme = this.dataset.theme;
+                    localStorage.setItem('theme', selectedTheme);
+                    applyTheme(selectedTheme);
+                    updateActiveOption(selectedTheme);
+                });
             });
-        });
-        
-        // Listen for system theme changes (only when auto mode is active)
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-            const savedTheme = localStorage.getItem('theme') || 'auto';
-            if (savedTheme === 'auto') {
-                applyTheme('auto');
-            }
-        });
+            
+            // Listen for system theme changes (only when auto mode is active)
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                const savedTheme = localStorage.getItem('theme') || 'auto';
+                if (savedTheme === 'auto') {
+                    applyTheme('auto');
+                }
+            });
 
-        // Add smooth scroll behavior for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            // Add smooth scroll behavior for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
             });
         });
