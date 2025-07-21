@@ -267,19 +267,19 @@
             text-align: center;
         }
 
-        .profile-placeholder {
+        .profile-avatar {
             width: 200px;
             height: 200px;
-            background: var(--accent-color);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin: 0 auto;
-            color: var(--bg-secondary);
-            font-size: 3em;
             box-shadow: 0 4px 12px var(--shadow-light);
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px var(--shadow-medium);
         }
 
         .bio-text {
@@ -390,10 +390,9 @@
                 gap: 20px;
             }
 
-            .profile-placeholder {
+            .profile-avatar {
                 width: 180px;
                 height: 180px;
-                font-size: 3em;
             }
 
 
@@ -452,7 +451,9 @@
                 <h2>About Me</h2>
                 <div class="bio-content">
                     <div class="bio-image">
-                        <div class="profile-placeholder">RS</div>
+                        <a href="https://linkedin.com/in/irusland" target="_blank">
+                            <img src="https://avatars.githubusercontent.com/u/49832869" alt="Ruslan Sirazhetdinov" class="profile-avatar">
+                        </a>
                     </div>
                     <div class="bio-text">
                         <p><strong>I'm Ruslan @irusland,</strong></p>
