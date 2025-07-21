@@ -89,7 +89,7 @@
 
         .cv-embed iframe {
             width: 100%;
-            height: 800px;
+            height: 1200px;
             border: none;
         }
 
@@ -281,11 +281,6 @@
                 padding: 20px 0;
             }
 
-            .cv-embed iframe {
-                height: 700px;
-            }
-
-
             .bio-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -308,10 +303,6 @@
             .contact-info {
                 flex-direction: column;
                 gap: 10px;
-            }
-
-            .cv-embed iframe {
-                height: 600px;
             }
 
             .cv-download-btn {
@@ -341,25 +332,6 @@
         </div>
     </header>
 
-    <!-- CV Preview Section -->
-    <section class="cv-preview">
-        <div class="container">
-            <div class="cv-embed">
-                <iframe
-                    src="https://docs.google.com/gview?url=https://raw.githubusercontent.com/irusland/irusland/main/ruslan-sirazhetdinov-cv-en.pdf&embedded=true"
-                    frameborder="0">
-                </iframe>
-                <div class="cv-actions">
-                    <a href="https://github.com/irusland/irusland/blob/main/ruslan-sirazhetdinov-cv-en.pdf" class="cv-download-btn" target="_blank">
-                        📄 Download PDF
-                    </a>
-                    <a href="https://github.com/irusland/irusland/raw/main/ruslan-sirazhetdinov-cv-en.pdf" class="cv-download-btn" target="_blank">
-                        📥 Direct Download
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Main Content -->
     <div class="content">
@@ -405,16 +377,20 @@
         </section>
 
         <!-- Resume Section -->
-        <section class="section">
+        <section class="section cv-preview">
             <div class="container">
                 <h2>Resume</h2>
-                <div class="resume-container">
-                    <div class="resume-preview">
-                        <div class="resume-icon">📋</div>
-                        <h3>Professional CV</h3>
-                        <p>Download my complete resume to learn more about my professional experience, technical skills, and achievements in Software Development Engineering.</p>
-                        <a href="https://github.com/irusland/irusland/blob/main/ruslan-sirazhetdinov-cv-en.pdf" class="resume-link" target="_blank">
-                            📄 Download CV (PDF)
+                <div class="cv-embed">
+                    <iframe
+                        src="https://docs.google.com/gview?url=https://raw.githubusercontent.com/irusland/irusland/main/ruslan-sirazhetdinov-cv-en.pdf&embedded=true"
+                        frameborder="0">
+                    </iframe>
+                    <div class="cv-actions">
+                        <a href="https://github.com/irusland/irusland/blob/main/ruslan-sirazhetdinov-cv-en.pdf" class="cv-download-btn" target="_blank">
+                            📄 View on GitHub
+                        </a>
+                        <a href="https://github.com/irusland/irusland/raw/main/ruslan-sirazhetdinov-cv-en.pdf" class="cv-download-btn" target="_blank">
+                            📥 Direct Download
                         </a>
                     </div>
                 </div>
