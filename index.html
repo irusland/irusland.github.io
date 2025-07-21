@@ -75,56 +75,38 @@
         .theme-toggle {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .theme-switch {
+        .theme-selector {
+            display: flex;
+            background: var(--bg-accent);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2px;
             position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
         }
 
-        .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
+        .theme-option {
+            padding: 6px 12px;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
+            border-radius: 18px;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            color: var(--text-secondary);
+            min-width: 40px;
+            text-align: center;
         }
 
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
+        .theme-option.active {
+            background: var(--accent-color);
+            color: var(--bg-secondary);
+            box-shadow: 0 2px 4px var(--shadow-light);
         }
 
-        input:checked + .slider {
-            background-color: var(--accent-color);
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-
-        .theme-label {
-            font-size: 14px;
+        .theme-option:hover:not(.active) {
             color: var(--text-primary);
         }
 
@@ -424,12 +406,11 @@
                 </div>
                 <div class="contact-info">
                     <div class="theme-toggle">
-                        <span class="theme-label">🌙</span>
-                        <label class="theme-switch">
-                            <input type="checkbox" id="theme-toggle">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="theme-label">☀️</span>
+                        <div class="theme-selector">
+                            <div class="theme-option" data-theme="dark">🌙</div>
+                            <div class="theme-option active" data-theme="auto">🖥️</div>
+                            <div class="theme-option" data-theme="light">☀️</div>
+                        </div>
                     </div>
                     <a href="http://t.me/irusland" class="contact-link" target="_blank">
                         📱 Telegram
@@ -520,43 +501,53 @@
 
     <script>
         // Theme switching functionality
-        const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const themeOptions = document.querySelectorAll('.theme-option');
         
-        // Check for saved theme preference or default to 'light'
-        const currentTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Get system preference
+        const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // Apply theme to body
+        const applyTheme = (theme) => {
+            if (theme === 'auto') {
+                body.setAttribute('data-theme', getSystemTheme());
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+        };
+        
+        // Update active theme option
+        const updateActiveOption = (selectedTheme) => {
+            themeOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.dataset.theme === selectedTheme) {
+                    option.classList.add('active');
+                }
+            });
+        };
+        
+        // Get saved theme preference or default to 'auto'
+        const currentTheme = localStorage.getItem('theme') || 'auto';
         
         // Set initial theme
-        if (currentTheme) {
-            body.setAttribute('data-theme', currentTheme);
-            themeToggle.checked = currentTheme === 'light';
-        } else if (prefersDark) {
-            body.setAttribute('data-theme', 'dark');
-            themeToggle.checked = false;
-        }
+        applyTheme(currentTheme);
+        updateActiveOption(currentTheme);
         
-        // Theme toggle event listener
-        themeToggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
+        // Theme option click handlers
+        themeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const selectedTheme = this.dataset.theme;
+                localStorage.setItem('theme', selectedTheme);
+                applyTheme(selectedTheme);
+                updateActiveOption(selectedTheme);
+            });
         });
         
-        // Listen for system theme changes
+        // Listen for system theme changes (only when auto mode is active)
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-            if (!localStorage.getItem('theme')) {
-                if (e.matches) {
-                    body.setAttribute('data-theme', 'dark');
-                    themeToggle.checked = false;
-                } else {
-                    body.setAttribute('data-theme', 'light');
-                    themeToggle.checked = true;
-                }
+            const savedTheme = localStorage.getItem('theme') || 'auto';
+            if (savedTheme === 'auto') {
+                applyTheme('auto');
             }
         });
 
