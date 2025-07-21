@@ -71,6 +71,53 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
         }
 
+        /* CV Preview Section */
+        .cv-preview {
+            padding: 40px 0;
+            background: #ffffff;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .cv-embed {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .cv-embed iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+
+        .cv-actions {
+            padding: 20px;
+            text-align: center;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .cv-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin: 0 10px;
+        }
+
+        .cv-download-btn:hover {
+            background: #34495e;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
 
         /* Content Sections */
         .content {
@@ -230,6 +277,14 @@
                 text-align: center;
             }
 
+            .cv-preview {
+                padding: 20px 0;
+            }
+
+            .cv-embed iframe {
+                height: 700px;
+            }
+
 
             .bio-content {
                 grid-template-columns: 1fr;
@@ -254,6 +309,15 @@
                 flex-direction: column;
                 gap: 10px;
             }
+
+            .cv-embed iframe {
+                height: 600px;
+            }
+
+            .cv-download-btn {
+                display: block;
+                margin: 10px auto;
+            }
         }
     </style>
 </head>
@@ -277,6 +341,25 @@
         </div>
     </header>
 
+    <!-- CV Preview Section -->
+    <section class="cv-preview">
+        <div class="container">
+            <div class="cv-embed">
+                <iframe
+                    src="https://docs.google.com/gview?url=https://raw.githubusercontent.com/irusland/irusland/main/ruslan-sirazhetdinov-cv-en.pdf&embedded=true"
+                    frameborder="0">
+                </iframe>
+                <div class="cv-actions">
+                    <a href="https://github.com/irusland/irusland/blob/main/ruslan-sirazhetdinov-cv-en.pdf" class="cv-download-btn" target="_blank">
+                        📄 Download PDF
+                    </a>
+                    <a href="https://github.com/irusland/irusland/raw/main/ruslan-sirazhetdinov-cv-en.pdf" class="cv-download-btn" target="_blank">
+                        📥 Direct Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <div class="content">
