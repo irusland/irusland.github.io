@@ -417,8 +417,30 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
-                text-align: center;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+            
+            .logo {
+                flex: 1;
+            }
+            
+            .contact-info {
+                flex-direction: row;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            
+            .contact-link {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .theme-selector {
+                transform: scale(0.9);
             }
 
             .cv-preview {
@@ -443,9 +465,26 @@
         }
 
         @media (max-width: 480px) {
-            .contact-info {
+            .header-content {
                 flex-direction: column;
-                gap: 10px;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .contact-info {
+                flex-direction: row;
+                gap: 8px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .contact-link {
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            
+            .theme-selector {
+                transform: scale(0.8);
             }
 
             .cv-download-btn {
