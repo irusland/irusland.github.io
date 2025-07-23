@@ -315,6 +315,51 @@
             border: none;
         }
 
+        /* Social Links Section */
+        .social-links {
+            padding: 60px 0;
+            background: var(--bg-secondary);
+        }
+
+        .social-links-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--accent-color);
+            color: var(--bg-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px var(--shadow-medium);
+        }
+
+        .social-link .emoji {
+            font-size: 20px;
+        }
+
         /* Resume Section */
         .resume-container {
             max-width: 800px;
@@ -429,7 +474,7 @@
                     <a href="http://t.me/irusland" class="contact-link" target="_blank">
                         📱 Telegram
                     </a>
-                    <a href="mailto:ruslan@sirazhetdinov.com" class="contact-link">
+                    <a href="mailto:irusland@icloud.com" class="contact-link">
                         ✉️ Email
                     </a>
                 </div>
@@ -452,11 +497,46 @@
                     </div>
                     <div class="bio-text">
                         <p><strong>I'm Ruslan @irusland,</strong></p>
-                        <p>🤖 <strong>AI/ML Software Development Engineer</strong> - creating innovative AI solutions for the real world</p>
-                        <p>🏃‍♂️ <strong>Professional Athlete</strong> - achieving top results in sports</p>
+                        <p>🤖 <strong>AI/ML Software Development Engineer</strong></p>
+                        <p>🏃‍♂️ <strong>Professional Athlete</strong></p>
                         <p>🎓 <strong>Master's in Computer Science with honors at MIPT</strong></p>
                         <p>🏆 <strong>World Champion in Snowkite Freestyle</strong></p>
                         <p>⛵ <strong>Master of Sports of Russia in Sailing</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Links Section -->
+        <section class="section social-links">
+            <div class="container">
+                <h2>My Links</h2>
+                <div class="social-links-container">
+                    <div class="social-grid">
+                        <a href="https://youtube.com/@irusland" class="social-link" target="_blank">
+                            <span class="emoji">📺</span>
+                            YouTube Channel
+                        </a>
+                        <a href="https://linkedin.com/in/irusland" class="social-link" target="_blank">
+                            <span class="emoji">📋</span>
+                            LinkedIn Profile
+                        </a>
+                        <a href="https://github.com/irusland" class="social-link" target="_blank">
+                            <span class="emoji">💻</span>
+                            GitHub Portfolio
+                        </a>
+                        <a href="https://instagram.com/irusland" class="social-link" target="_blank">
+                            <span class="emoji">📷</span>
+                            Instagram
+                        </a>
+                        <a href="https://folio.procreate.com/irusland" class="social-link" target="_blank">
+                            <span class="emoji">🎨</span>
+                            Procreate Portfolio
+                        </a>
+                        <a href="https://t.me/iruslandfeed" class="social-link" target="_blank">
+                            <span class="emoji">📢</span>
+                            Telegram Channel
+                        </a>
                     </div>
                 </div>
             </div>
