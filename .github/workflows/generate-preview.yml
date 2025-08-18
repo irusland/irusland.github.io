@@ -1,0 +1,86 @@
+name: Generate Preview PNG
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  generate-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install playwright
+        
+      - name: Generate preview PNG
+        run: |
+          cat << 'EOF' > generate-preview.js
+          const { chromium } = require('playwright');
+          
+          (async () => {
+            const browser = await chromium.launch();
+            const page = await browser.newPage();
+            
+            await page.setContent(`
+              <!DOCTYPE html>
+              <html>
+              <head><style>
+                body { margin: 0; font-family: Arial; }
+                .container { 
+                  width: 800px; height: 400px;
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  display: flex; align-items: center; justify-content: center;
+                }
+                .card {
+                  background: rgba(255,255,255,0.15);
+                  border: 2px solid rgba(255,255,255,0.3);
+                  border-radius: 20px; padding: 40px;
+                  text-align: center; color: white;
+                }
+                .title { font-size: 42px; font-weight: bold; margin-bottom: 10px; }
+                .subtitle { font-size: 22px; opacity: 0.9; margin-bottom: 20px; }
+                .url { 
+                  background: rgba(255,255,255,0.25);
+                  padding: 10px 20px; border-radius: 25px;
+                  font-size: 18px; font-weight: bold; margin-bottom: 15px;
+                }
+                .hint { font-size: 16px; opacity: 0.8; }
+              </style></head>
+              <body>
+                <div class="container">
+                  <div class="card">
+                    <div class="title">🌐 irusland</div>
+                    <div class="subtitle">Portfolio & Projects</div>
+                    <div class="url">irusland.github.io</div>
+                    <div class="hint">Click to visit website</div>
+                  </div>
+                </div>
+              </body>
+              </html>
+            `);
+            
+            await page.setViewportSize({ width: 800, height: 400 });
+            await page.screenshot({ 
+              path: 'preview.png', 
+              fullPage: true 
+            });
+            
+            await browser.close();
+          })();
+          EOF
+          
+          node generate-preview.js
+          
+      - name: Commit preview PNG
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add preview.png
+          git commit -m "Auto-generate preview PNG" || exit 0
+          git push

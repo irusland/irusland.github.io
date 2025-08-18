@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>PNG Preview</title>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="400"></canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+// Generate preview immediately
+const gradient = ctx.createLinearGradient(0, 0, 800, 400);
+gradient.addColorStop(0, '#667eea');
+gradient.addColorStop(1, '#764ba2');
+ctx.fillStyle = gradient;
+ctx.fillRect(0, 0, 800, 400);
+
+// Glass card
+ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+ctx.fillRect(100, 80, 600, 240);
+ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+ctx.lineWidth = 2;
+ctx.strokeRect(100, 80, 600, 240);
+
+// Title
+ctx.fillStyle = 'white';
+ctx.font = 'bold 42px Arial, sans-serif';
+ctx.textAlign = 'center';
+ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+ctx.shadowBlur = 4;
+ctx.shadowOffsetX = 2;
+ctx.shadowOffsetY = 2;
+ctx.fillText('🌐 irusland', 400, 150);
+
+ctx.shadowColor = 'transparent';
+ctx.font = '22px Arial, sans-serif';
+ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+ctx.fillText('Portfolio & Projects', 400, 185);
+
+// URL box
+ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+ctx.fillRect(275, 210, 250, 50);
+ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+ctx.strokeRect(275, 210, 250, 50);
+
+ctx.fillStyle = 'white';
+ctx.font = 'bold 18px Arial, sans-serif';
+ctx.fillText('irusland.github.io', 400, 240);
+
+ctx.font = '16px Arial, sans-serif';
+ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+ctx.fillText('Click to visit website', 400, 280);
+
+// Hide everything except canvas when loaded
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.background = 'transparent';
+});
+</script>
+</body>
+</html>

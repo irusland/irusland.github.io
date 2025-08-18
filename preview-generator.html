@@ -120,17 +120,14 @@
             if (urlParams.get('png') === '1') {
                 generatePreview();
                 setTimeout(() => {
-                    // Replace page content with PNG
+                    // Get PNG data and redirect to data URL
                     canvas.toBlob(function(blob) {
-                        document.body.innerHTML = '';
-                        const img = document.createElement('img');
-                        img.src = URL.createObjectURL(blob);
-                        img.style.width = '100%';
-                        img.style.height = 'auto';
-                        document.body.appendChild(img);
-                        
-                        // Set proper content type
-                        document.contentType = 'image/png';
+                        const reader = new FileReader();
+                        reader.onload = function() {
+                            // Redirect to data URL which browsers will display as PNG
+                            window.location.href = reader.result;
+                        };
+                        reader.readAsDataURL(blob);
                     }, 'image/png');
                 }, 100);
             }
