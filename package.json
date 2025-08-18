@@ -1,0 +1,7 @@
+{
+  "name": "irusland-preview-generator",
+  "version": "1.0.0",
+  "dependencies": {
+    "@vercel/og": "^0.5.20"
+  }
+}
