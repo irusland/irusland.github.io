@@ -110,7 +110,7 @@
             // Convert canvas to blob and serve as PNG
             canvas.toBlob(function(blob) {
                 const url = URL.createObjectURL(blob);
-                window.open(url, '_blank');
+                window.location.href = url; // Redirect in same page instead of popup
             }, 'image/png');
         }
 
@@ -137,6 +137,14 @@
         window.onload = function() {
             generatePreview();
             checkAutoServe();
+            
+            // Auto-click "Auto-Serve PNG" button if ?auto=1 parameter is present
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('auto') === '1') {
+                setTimeout(() => {
+                    autoServePNG();
+                }, 500); // Small delay to ensure canvas is ready
+            }
         };
 
         // Auto-refresh preview every 30 seconds if accessed with ?png=1
