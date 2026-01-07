@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruslan Sirazhetdinov - AI Developer & World Champion</title>
+    <title>Ruslan Sirazhetdinov - Master of Sports and Computer Science</title>
     <style>
         * {
             margin: 0;
@@ -627,8 +627,8 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Ruslan Sirazhetdinov (@irusland)</p>
-            <p>AI Developer • World Champion • Innovation Enthusiast</p>
+            <p>&copy; <span id="year"></span> Ruslan Sirazhetdinov (<a href="http://t.me/irusland" target="_blank" style="color: inherit; text-decoration: underline;">@irusland</a>)</p>
+            <p>AI Software Engineer • Snowkite Freestyle World Champion • Innovation Enthusiast</p>
         </div>
     </footer>
 
@@ -662,9 +662,12 @@
         
         // Get saved theme preference or default to 'auto'
         const currentTheme = localStorage.getItem('theme') || 'auto';
-        
+
         // Set initial theme immediately
         applyTheme(currentTheme);
+
+        // Set current year immediately
+        document.getElementById('year').textContent = new Date().getFullYear();
         
         // Wait for DOM to load for click handlers
         document.addEventListener('DOMContentLoaded', function() {
