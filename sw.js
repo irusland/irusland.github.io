@@ -11,10 +11,11 @@ const STATIC_ASSETS = [
     "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/github.svg",
     "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/instagram.svg",
     "https://www.icreatemagazine.nl/app/uploads/2023/08/Procreate.png",
-    "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/telegram.svg"
+    "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/telegram.svg",
+    "assets/favicon.svg?v=4f9a4121969a"
 ];
 const CACHE_PREFIX = 'irusland-static-';
-const CACHE_NAME = CACHE_PREFIX + "88c0c93a3157";
+const CACHE_NAME = CACHE_PREFIX + "88fd39413064";
 const allowed = new Set(STATIC_ASSETS.map(path => new URL(path, self.location.href).href));
 const pending = new Map();
 
