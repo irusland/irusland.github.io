@@ -107,10 +107,10 @@
         const distance = section.offsetHeight - stage.offsetHeight;
         const progress = Math.max(0, Math.min(1, (top - bounds.top) / Math.max(1, distance)));
         updateGuide(progress);
-        // Finish the film, blur the frame, then hold the title before leaving the stage.
-        targetTime = clamp(progress / 0.84) * lastFrameTime;
-        const blur = smooth((progress - 0.78) / 0.12);
-        const title = smooth((progress - 0.88) / 0.08);
+        // Blur and reveal the title while the film is still moving beneath it.
+        targetTime = clamp(progress / 0.96) * lastFrameTime;
+        const blur = smooth((progress - 0.65) / 0.16);
+        const title = smooth((progress - 0.73) / 0.12);
         section.style.setProperty('--film-blur', `${blur * 24}px`);
         section.style.setProperty('--film-scale', String(1 + blur * 0.08));
         section.style.setProperty('--story-opacity', String(title));

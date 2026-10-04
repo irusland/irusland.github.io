@@ -3,7 +3,7 @@ const STATIC_ASSETS = [
     "assets/site.css?v=5142b2436f7a",
     "assets/scroll-video.css?v=786d0be9c0db",
     "assets/site.js?v=223c5e0d7fbe",
-    "assets/scroll-video.js?v=ed5ef2649848",
+    "assets/scroll-video.js?v=f8db10d41f0d",
     "assets/kite-poster.jpg?v=9906cd44fa39",
     "https://avatars.githubusercontent.com/u/49832869?s=400",
     "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/linkedin.svg",
@@ -14,7 +14,7 @@ const STATIC_ASSETS = [
     "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/telegram.svg"
 ];
 const CACHE_PREFIX = 'irusland-static-';
-const CACHE_NAME = CACHE_PREFIX + "b15536e58755";
+const CACHE_NAME = CACHE_PREFIX + "88c0c93a3157";
 const allowed = new Set(STATIC_ASSETS.map(path => new URL(path, self.location.href).href));
 const pending = new Map();
 
