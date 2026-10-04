@@ -21,6 +21,19 @@
     systemTheme.addEventListener('change', () => {
         if (selectedTheme === 'auto') applyTheme();
     });
+    const settings = document.querySelector('.site-settings');
+    document.addEventListener('click', event => {
+        if (settings.open && !settings.contains(event.target)) settings.open = false;
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && settings.open) {
+            settings.open = false;
+            settings.querySelector('summary').focus();
+        }
+    });
+    document.addEventListener('focusin', event => {
+        if (settings.open && !settings.contains(event.target)) settings.open = false;
+    });
     applyTheme();
     document.getElementById('year').textContent = new Date().getFullYear();
 })();

@@ -1,8 +1,8 @@
 // When editing a local asset, update its ?v=content-hash in index.html and this list.
 const STATIC_ASSETS = [
-    "assets/site.css?v=5142b2436f7a",
+    "assets/site.css?v=a5535994ad1a",
     "assets/scroll-video.css?v=786d0be9c0db",
-    "assets/site.js?v=223c5e0d7fbe",
+    "assets/site.js?v=f269e5b29d4d",
     "assets/scroll-video.js?v=f8db10d41f0d",
     "assets/kite-poster.jpg?v=9906cd44fa39",
     "https://avatars.githubusercontent.com/u/49832869?s=400",
@@ -15,7 +15,7 @@ const STATIC_ASSETS = [
     "assets/favicon.svg?v=4f9a4121969a"
 ];
 const CACHE_PREFIX = 'irusland-static-';
-const CACHE_NAME = CACHE_PREFIX + "88fd39413064";
+const CACHE_NAME = CACHE_PREFIX + "ac0c93036c05";
 const allowed = new Set(STATIC_ASSETS.map(path => new URL(path, self.location.href).href));
 const pending = new Map();
 
