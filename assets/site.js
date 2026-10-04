@@ -24,3 +24,10 @@
     applyTheme();
     document.getElementById('year').textContent = new Date().getFullYear();
 })();
+
+// Static caching is optional; the page still works when storage is disabled.
+if (window.isSecureContext && 'serviceWorker' in navigator) {
+    navigator.serviceWorker.register(new URL('sw.js', document.baseURI), {
+        updateViaCache: 'none',
+    }).catch(() => {});
+}
