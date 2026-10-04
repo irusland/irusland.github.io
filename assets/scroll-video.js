@@ -27,6 +27,7 @@
     let objectURL;
     let lastFrameTime = 0;
     let sourceEndTime;
+    let sourceVersion = 0;
     let guideTimer;
     let previousProgress = null;
     let autoFrame = 0;
@@ -141,6 +142,7 @@
         status.textContent = 'This video could not be loaded. Try another MP4 or WebM file.';
     }
     function loadSource(src, endTime) {
+        sourceVersion += 1;
         resetGuide();
         sourceEndTime = endTime;
         targetTime = 0;
@@ -154,7 +156,7 @@
     }
     video.addEventListener('loadedmetadata', () => {
         if (!Number.isFinite(video.duration) || video.duration <= 0) return fail();
-        // Container duration can extend past the video track (for example, audio padding).
+        // Container duration extends past the presentation time of the last video frame.
         // Use the measured final frame for the published clip, or leave a small safety margin.
         lastFrameTime = Number.isFinite(sourceEndTime) && sourceEndTime >= 0
             ? Math.min(sourceEndTime, Math.max(0, video.duration - 0.001))
@@ -203,5 +205,45 @@
     resizeObserver.observe(header);
     resizeObserver.observe(section);
     section.classList.toggle('is-reduced', reducedMotion.matches);
-    if (section.dataset.videoSrc) loadSource(section.dataset.videoSrc, Number.parseFloat(section.dataset.videoEnd));
+    async function loadPublishedSource() {
+        const src = section.dataset.videoSrc;
+        if (!src) return;
+        const endTime = Number.parseFloat(section.dataset.videoEnd);
+        const version = sourceVersion;
+        const cacheName = 'irusland-scroll-video-v1';
+        status.hidden = false;
+        status.textContent = 'Loading film…';
+        try {
+            if (!window.isSecureContext || !('caches' in window)) throw new Error('Cache unavailable');
+            const url = new URL(src, document.baseURI).href;
+            const cache = await caches.open(cacheName);
+            let response = await cache.match(url);
+            if (!response) {
+                response = await fetch(url);
+                if (response.status !== 200 || !response.headers.get('Content-Type')?.startsWith('video/')) {
+                    throw new Error('Invalid video response');
+                }
+                // Store only a complete file, never a partial HTTP range response.
+                const blob = await response.blob();
+                if (!blob.size) throw new Error('Empty video');
+                response = new Response(blob, { headers: { 'Content-Type': blob.type } });
+                try {
+                    await cache.put(url, response.clone());
+                    // The content hash in the URL changes when the video is replaced.
+                    const keys = await cache.keys();
+                    await Promise.all(keys.filter(key => key.url !== url).map(key => cache.delete(key)));
+                } catch { /* Storage quota/private mode must not prevent playback. */ }
+            }
+            const blob = await response.blob();
+            if (!blob.size) throw new Error('Empty cached video');
+            if (version !== sourceVersion) return; // A locally selected film takes priority.
+            if (objectURL) URL.revokeObjectURL(objectURL);
+            objectURL = URL.createObjectURL(blob);
+            // Blob URLs support native seeking without additional server range requests.
+            loadSource(objectURL, endTime);
+        } catch {
+            if (version === sourceVersion) loadSource(src, endTime);
+        }
+    }
+    loadPublishedSource();
 })();

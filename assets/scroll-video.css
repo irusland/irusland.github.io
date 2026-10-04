@@ -31,7 +31,8 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 70% 25%, #31553b88, transparent 65%), #0c110e;
+    background: none;
+    pointer-events: none;
     z-index: -1;
 }
 .scroll-film.is-ready .scroll-film__stage::before {
